@@ -2,18 +2,20 @@
 package Modelo;
 
 public abstract class Revistas {
+    protected static int aux=1;
     protected int codigo, stock, tiempoDePublicacion;
     protected double precioBase;
     protected String nombre;
     protected char estado;
 
-    public Revistas(int codigo, int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
-        this.codigo = codigo;
+    public Revistas(int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
+        this.codigo = aux;
         this.stock = stock;
         this.tiempoDePublicacion = tiempoDePublicacion;
         this.precioBase = precioBase;
         this.nombre = nombre;
         this.estado = estado;
+        aux++;
     }
 
     public char getEstado() {

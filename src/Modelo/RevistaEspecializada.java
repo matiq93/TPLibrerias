@@ -4,8 +4,8 @@ package Modelo;
 public class RevistaEspecializada extends Revistas {
     private String tema;
 
-    public RevistaEspecializada(String tema, int codigo, int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
-        super(codigo, stock, tiempoDePublicacion, precioBase, nombre, estado);
+    public RevistaEspecializada(String tema, int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
+        super( stock, tiempoDePublicacion, precioBase, nombre, estado);
         this.tema = tema;
     }
 

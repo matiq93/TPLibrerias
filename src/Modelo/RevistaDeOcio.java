@@ -5,8 +5,8 @@ public class RevistaDeOcio extends Revistas{
     
     private String AyNPersonaje;
 
-    public RevistaDeOcio(String AyNPersonaje, int codigo, int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
-        super(codigo, stock, tiempoDePublicacion, precioBase, nombre, estado);
+    public RevistaDeOcio(String AyNPersonaje, int stock, int tiempoDePublicacion, double precioBase, String nombre, char estado) {
+        super(stock, tiempoDePublicacion, precioBase, nombre, estado);
         this.AyNPersonaje = AyNPersonaje;
     }
 

@@ -144,6 +144,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jSeparator1);
 
         jmNuevaRevista.setText("Nueva Revista");
+        jmNuevaRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmNuevaRevistaActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmNuevaRevista);
 
         jmModRevista.setText("Modificar Revista");
@@ -474,6 +479,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblTitulo.setVisible(true);
         jpanPanel.setVisible(true);
     }//GEN-LAST:event_jmRevExpprecioMayorAActionPerformed
+
+    private void jmNuevaRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNuevaRevistaActionPerformed
+        this.Ocultar();
+        new AltaRevistas().setVisible(true);
+    }//GEN-LAST:event_jmNuevaRevistaActionPerformed
 
     /**
      * @param args the command line arguments
