@@ -23,6 +23,7 @@ public class AltaRevistas extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         lblPrecioventa.setVisible(false);
+        this.setAlwaysOnTop(true);
     }
 
     /**

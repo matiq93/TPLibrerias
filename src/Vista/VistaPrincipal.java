@@ -140,6 +140,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1.add(lmmodLibro);
 
         jmEliminarLibro.setText("Eliminar Libro");
+        jmEliminarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEliminarLibroActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmEliminarLibro);
         jMenu1.add(jSeparator1);
 
@@ -152,9 +157,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jmNuevaRevista);
 
         jmModRevista.setText("Modificar Revista");
+        jmModRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmModRevistaActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmModRevista);
 
         jmEliminarRevista.setText("Eliminar Revista");
+        jmEliminarRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEliminarRevistaActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmEliminarRevista);
 
         jMenuBar1.add(jMenu1);
@@ -283,7 +298,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void lmmodLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lmmodLibroActionPerformed
         this.Ocultar();
-// TODO add your handling code here:
+        if(Main.lista.ModificarLibro(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el codigo", "0")))){
+            JOptionPane.showMessageDialog(null, "El precio ha sido modificado con exito");
+        }else{
+              JOptionPane.showMessageDialog(null, "El codigo ingresado no existe");
+        }
     }//GEN-LAST:event_lmmodLibroActionPerformed
 
     private void jmLibrosPrecioMayorAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmLibrosPrecioMayorAActionPerformed
@@ -484,6 +503,51 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.Ocultar();
         new AltaRevistas().setVisible(true);
     }//GEN-LAST:event_jmNuevaRevistaActionPerformed
+
+    private void jmModRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmModRevistaActionPerformed
+        this.Ocultar();
+        if(Main.lista.ModificarRevista(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el codigo", "0")))){
+            JOptionPane.showMessageDialog(null, "El precio ha sido modificado con exito");
+        }else{
+              JOptionPane.showMessageDialog(null, "El codigo ingresado no existe");
+        }
+    }//GEN-LAST:event_jmModRevistaActionPerformed
+
+    private void jmEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarLibroActionPerformed
+        this.Ocultar();
+        switch (Main.lista.eliminarLibro(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el codigo", "0")))){
+            case 1:{ 
+                JOptionPane.showMessageDialog(null, "El Libro ha sido eliminado con exito");
+                break;
+            }
+            case 2: {
+                JOptionPane.showMessageDialog(null, "el Libro no se ha eliminado");
+                break;
+            }
+            case 3: {
+                JOptionPane.showMessageDialog(null, "El codigo ingresado no existe");
+                break;
+            }
+        }
+    }//GEN-LAST:event_jmEliminarLibroActionPerformed
+
+    private void jmEliminarRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEliminarRevistaActionPerformed
+        this.Ocultar();
+        switch (Main.lista.eliminarRevista(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el codigo", "0")))){
+            case 1:{ 
+                JOptionPane.showMessageDialog(null, "La revista ha sido eliminada con exito");
+                break;
+            }
+            case 2: {
+                JOptionPane.showMessageDialog(null, "La revista no se ha eliminado");
+                break;
+            }
+            case 3: {
+                JOptionPane.showMessageDialog(null, "El codigo ingresado no existe");
+                break;
+            }
+        }
+    }//GEN-LAST:event_jmEliminarRevistaActionPerformed
 
     /**
      * @param args the command line arguments

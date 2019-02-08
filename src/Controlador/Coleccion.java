@@ -9,6 +9,7 @@ import Modelo.RevistaDeOcio;
 import Modelo.RevistaEspecializada;
 import Modelo.Revistas;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class Coleccion {
@@ -43,41 +44,88 @@ public class Coleccion {
         return existe;
     }
     
-    public void modificar(int codigo, double nuevoprecio){
+    public boolean ModificarLibro(int codigo){
         for (Object aux:lista)
         {
             if (aux instanceof Libro)
             {
                 if (((Libro) aux).getCodigo()==codigo)
                 {
-                    ((Libro) aux).setPrecioBase(nuevoprecio);
+                    ((Libro) aux).setPrecioBase(Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese Nuevo Precio", "0")));
+                    return true;
                 } 
-            }else if(aux instanceof Revistas){
-                if (((Revistas) aux).getCodigo()==codigo)
-                {
-                    ((Revistas) aux).setPrecioBase(nuevoprecio);
-                }
             }
         }
+        return false;
+    }
+    public boolean ModificarRevista(int codigo){
+        for (Object aux:lista)
+        {
+            if (aux instanceof Revistas)
+            {
+                if (((Revistas) aux).getCodigo()==codigo)
+                {
+                    ((Revistas) aux).setPrecioBase(Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese Nuevo Precio", "0")));
+                    return true;
+                } 
+            }
+        }
+        return false;
     }
     
-    public void eliminar(int codigo){
+    public int eliminarLibro(int codigo){
         for (Object aux:lista)
         {
             if (aux instanceof Libro)
             {
                 if (((Libro) aux).getCodigo()==codigo)
                 {
-                    ((Libro) aux).setEstado('P');
+                    int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar " + ((Libro)aux).toString() + "?");
+                    switch (confirmar){
+                        case 0:{
+                            ((Libro) aux).setEstado('P');
+                            return 1;
+                        } 
+                        case 1: {
+                            return 2;
+                        }
+                        case 2 :{
+                            return 2;
+                        }
+                    }                    
                 } 
-            }else if(aux instanceof Revistas){
-                if (((Revistas) aux).getCodigo()==codigo)
-                {
-                    ((Revistas) aux).setEstado('P');
-                }
             }
         }
+        return 3;
     }
+    
+     public int eliminarRevista(int codigo){
+        for (Object aux:lista)
+        {
+            if (aux instanceof Revistas)
+            {
+                if (((Revistas) aux).getCodigo()==codigo)
+                {
+                    int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar " + ((Revistas)aux).toString() + "?");
+                    switch (confirmar){
+                        case 0:{
+                            ((Revistas) aux).setEstado('P');
+                            return 1;
+                        } 
+                        case 1: {
+                            return 2;
+                        }
+                        case 2 :{
+                            return 2;
+                        }
+                    }                    
+                } 
+            }
+        }
+        return 3;
+    }
+    
+    
     //Libro
     public String [][] ListaPreciosLibro(){
         
