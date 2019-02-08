@@ -99,7 +99,7 @@ public class Coleccion {
                 if (((Libro) aux).getEstado() != 'P') {
                     mostrar[pos][0] = ((Libro) aux).getCodigo() + "";
                     mostrar[pos][1] = ((Libro) aux).getDescripcion() + "";
-                    mostrar[pos][2] = ((Libro) aux).precioDeVenta() + "";
+                    mostrar[pos][2] = "$ "+ String.format("%.2f", ((Libro) aux).precioDeVenta());
                     pos++;
                 }
             }
@@ -239,38 +239,59 @@ public class Coleccion {
     
     //Revistas
     
-    public String ListaPrecioRevista(){
-        String mostrar="";
+    public String [][]ListaPrecioRevista(){
+        int cont=0;
         for (Object aux:lista)
         {
             if (aux instanceof Revistas)
             {
                 if (((Revistas) aux).getEstado()!='P')
                 {
-                    mostrar+=aux.toString()+"\n";
+                    cont++;
                 }
             }
+        }
+        String mostrar[][]=new String[cont][3];
+        int pos=0;
+        for (Object aux :lista) {
+            if (aux instanceof Revistas) {
+                if (((Revistas) aux).getEstado()!='P')
+                {
+                    mostrar[pos][0]=((Revistas) aux).getCodigo()+"";
+                    mostrar[pos][1]=((Revistas) aux).getNombre();
+                    mostrar[pos][2]="$"+String.format("%.2f", ((Revistas) aux).precioDeVenta());
+                    pos++;
+                }
+            }           
         }
         return mostrar;
     }
     
-    public String StockOcio(){
-        String mostrar="";
-        int acu=0;
+    public String [][] StockOcio(){
+        int cont =0;
         for (Object aux:lista)
         {
             if (aux instanceof RevistaDeOcio)
             {
-                mostrar+=((RevistaDeOcio) aux).toStringStock()+"\n";
-                acu++;
+                cont++;
             }
         }
-        mostrar += "\nTotal:     "+acu+" unidades";
+        String mostrar[][]=new String[cont][3];
+        int pos =0;
+        for (Object aux:lista)
+        {
+            if (aux instanceof RevistaDeOcio)
+            {
+                mostrar[pos][0] = ((Revistas) aux).getCodigo() + "";
+                mostrar[pos][1] = ((Revistas) aux).getNombre();
+                mostrar[pos][2] = ((RevistaDeOcio) aux).getStock() + "";
+                pos++;
+            }
+        }
         return mostrar;
     }
     
-    public String RevistasPrecioMayorA(double precio){
-        String mostrar="";
+    public String [][] RevistasPrecioMayorA(double precio){
         int cont=0;
         for (Object aux:lista)
         {
@@ -278,34 +299,43 @@ public class Coleccion {
             {
                 if (((Revistas) aux).precioDeVenta()>precio)
                 {
-                    mostrar+= aux.toString()+"\n";
                     cont++;
                 }
             }
         }
-        String mostrar2="Hay "+cont+" Revistas con precio mayor a: $"+precio+"\n\n"+mostrar;
-        return mostrar2;
-    }
-    
-    public String porcentajes(){
-       String mostrar="";
-       int cantocio=0,cantesp=0, canttot=0;
+        String mostrar[][]=new String[cont][3];
+        int pos=0;
         for (Object aux:lista)
         {
-            if (aux instanceof RevistaDeOcio)
+            if (aux instanceof RevistaEspecializada)
             {
-                cantocio++;
-                canttot++;                
-            }else if (aux instanceof RevistaEspecializada)
-            {
-                cantesp++;
-                canttot++;
+                if (((Revistas) aux).precioDeVenta()>precio)
+                {
+                    mostrar[pos][0]=((Revistas) aux).getCodigo()+"";
+                    mostrar[pos][1]=((Revistas) aux).getNombre();
+                    mostrar[pos][2]="$"+String.format("%.2f", ((Revistas) aux).precioDeVenta());
+                    pos++;
+                }
             }
         }
-        double porcentajeOcio=(cantocio/canttot)*100;
-        double porcentajeEsp= (cantesp/canttot)*100;
-        mostrar = "Porcentaje de revistas de ocio: "+String.format("%.02f", porcentajeOcio)+"%\nPorcentaje de revistas especializadas: "+String.format("%.02f", porcentajeEsp)+"%";
-       return mostrar;
+        return mostrar;
+    }
+    
+    public double PorcentajeRevOcio(){
+       
+       int cantocio=0, canttot=0;
+        for (Object aux:lista)
+        {
+            if (aux instanceof Revistas) {
+                canttot++;
+                if (aux instanceof RevistaDeOcio) {
+                    cantocio++;
+                }
+            }
+        }
+        double a=cantocio;
+        double b=canttot;
+        return (a / b) * 100;
     }
     
         public double PromedioOcio(){

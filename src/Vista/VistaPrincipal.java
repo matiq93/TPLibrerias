@@ -215,12 +215,27 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Consultas Revistas");
 
         jmListadeRevistas.setText("Lista de Revistas");
+        jmListadeRevistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListadeRevistasActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmListadeRevistas);
 
         jmStockOcio.setText("Stock Revistas de Ocio");
+        jmStockOcio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmStockOcioActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmStockOcio);
 
         jmRevExpprecioMayorA.setText("Revistas Esp. con precio mayor a :");
+        jmRevExpprecioMayorA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRevExpprecioMayorAActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmRevExpprecioMayorA);
 
         jmPorcentajeRev.setText("Porcentaje Revistas");
@@ -303,7 +318,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.Ocultar();
         lblTitulo.setText("Precio Promedio Libros Nacionales");
         lblTitulo.setVisible(true);
-        txtConclusion.setText("El Precio Promedio de los Libros Nacionales es de $"+String.format("%.2f", Main.lista.PromedioNacionales()));
+        txtConclusion.setText("El Precio Promedio de los Libros Nacionales es de: $"+String.format("%.2f", Main.lista.PromedioNacionales()));
         txtConclusion.setVisible(true);
         
 // TODO add your handling code here:
@@ -311,17 +326,29 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jmPorcentajeRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPorcentajeRevActionPerformed
         this.Ocultar();
-        // TODO add your handling code here:
+        this.Ocultar();
+        lblTitulo.setText("Porcentaje de Revistas");
+        lblTitulo.setVisible(true);
+        txtConclusion.setText("Porcentaje de Revistas de Ocio: "+String.format("%.2f", Main.lista.PorcentajeRevOcio())+"%"
+                            +"\nPorcentaje de Revistas Especializadas: "+String.format("%.2f",100- Main.lista.PorcentajeRevOcio())+"%");
+        txtConclusion.setVisible(true);
     }//GEN-LAST:event_jmPorcentajeRevActionPerformed
 
     private void jmPromRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPromRevActionPerformed
         this.Ocultar();
-// TODO add your handling code here:
+        this.Ocultar();
+        lblTitulo.setText("Precio Promedio Revistas de Ocio");
+        lblTitulo.setVisible(true);
+        txtConclusion.setText("El Precio Promedio de las Revistas de Ocio es de: $"+String.format("%.2f", Main.lista.PromedioOcio()));
+        txtConclusion.setVisible(true);
     }//GEN-LAST:event_jmPromRevActionPerformed
 
     private void jmRevmasCostosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRevmasCostosaActionPerformed
         this.Ocultar();
-// TODO add your handling code here:
+        lblTitulo.setText("Revista Mas Costosa");
+        lblTitulo.setVisible(true);
+        txtConclusion.setText(Main.lista.RevistaMasCostosa());
+        txtConclusion.setVisible(true);
     }//GEN-LAST:event_jmRevmasCostosaActionPerformed
 
     private void jmListaLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaLibrosActionPerformed
@@ -378,6 +405,75 @@ public class VistaPrincipal extends javax.swing.JFrame {
         txtConclusion.setText(Main.lista.NacionalMasCostoso());
         txtConclusion.setVisible(true);
     }//GEN-LAST:event_jmLibromasCostosoActionPerformed
+
+    private void jmListadeRevistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListadeRevistasActionPerformed
+        this.Ocultar();
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
+                Main.lista.ListaPrecioRevista(),
+                new String[]{
+                    "Codigo", "Nombre", "Precio"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false
+            };
+            
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        tblTabla.getTableHeader().setReorderingAllowed(false);
+        
+        lblTitulo.setText("Lista de Revistas");
+        lblTitulo.setVisible(true);
+        jpanPanel.setVisible(true);        
+        
+    }//GEN-LAST:event_jmListadeRevistasActionPerformed
+
+    private void jmStockOcioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmStockOcioActionPerformed
+        this.Ocultar();
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
+            Main.lista.StockOcio(),
+            new String [] {
+                "Codigo", "Nombre", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTabla.getTableHeader().setReorderingAllowed(false);
+        lblTitulo.setText("Stock de Revistas de Ocio");
+        lblTitulo.setVisible(true);
+        jpanPanel.setVisible(true);
+    }//GEN-LAST:event_jmStockOcioActionPerformed
+
+    private void jmRevExpprecioMayorAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRevExpprecioMayorAActionPerformed
+        this.Ocultar();
+        double precio= Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese Precio"));
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
+            Main.lista.RevistasPrecioMayorA(precio),
+            new String [] {
+                "Codigo", "Descripcion", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTabla.getTableHeader().setReorderingAllowed(false);
+        lblTitulo.setText("Revistas Especializadas con precio mayor a: $"+String.format("%.2f", precio));
+        lblTitulo.setVisible(true);
+        jpanPanel.setVisible(true);
+    }//GEN-LAST:event_jmRevExpprecioMayorAActionPerformed
 
     /**
      * @param args the command line arguments

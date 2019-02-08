@@ -93,10 +93,8 @@ public class RevistaDeOcio extends Revistas{
 
     @Override
     public String toString() {
-        return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.nombre+"     Precio: $"+precioDeVenta();
+        return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.nombre+"     Precio: $"+String.format("%.2f",precioDeVenta());
     }
     
-    public String toStringStock(){
-        return "Titulo: "+this.nombre+"     Stock: "+this.stock+" unidades.";
-    }
+    
 }

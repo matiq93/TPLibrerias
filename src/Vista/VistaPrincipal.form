@@ -158,16 +158,25 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Lista de Revistas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmListadeRevistasActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jmStockOcio">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Stock Revistas de Ocio"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmStockOcioActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jmRevExpprecioMayorA">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Revistas Esp. con precio mayor a :"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmRevExpprecioMayorAActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jmPorcentajeRev">
                   <Properties>

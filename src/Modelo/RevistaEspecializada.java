@@ -94,7 +94,7 @@ public class RevistaEspecializada extends Revistas {
 
     @Override
     public String toString() {
-         return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.nombre+"     Precio: $"+precioDeVenta();
+         return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.nombre+"     Precio: $"+String.format("%.2f",precioDeVenta());
     }
     
     

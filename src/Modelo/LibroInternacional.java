@@ -85,7 +85,7 @@ public class LibroInternacional extends Libro {
 
     @Override
     public String toString() {
-        return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.descripcion+"     Precio: $"+precioDeVenta();
+        return "Codigo: "+String.format("%04d", this.codigo)+"     Titulo: "+this.descripcion+"     Precio: $"+String.format("%.2f",precioDeVenta());
     }
     
     public String toStringStock(){
